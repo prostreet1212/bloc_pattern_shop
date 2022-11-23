@@ -9,17 +9,18 @@ import '../model/coffee_menu.dart';
 enum MenuEvent { buyNot }
 
 class MenuBloc {
-  List<CoffeeMenu> menuList = [CoffeeMenu('image', 'name', 3)];
+  //List<CoffeeMenu> menuList = [CoffeeMenu('image', 'name', 3)];
+  int menuList=1;
 
-  final _stateController = StreamController<List<CoffeeMenu>>();
+  final _stateController = StreamController<int>();
   final _eventsController = StreamController<MenuEvent>();
 
-  Stream<List<CoffeeMenu>> get state1 => _stateController.stream;
+  Stream<int> get state1 => _stateController.stream;
 
   Sink<MenuEvent> get action => _eventsController.sink;
 
   MenuBloc() {
-    //_eventsController.stream.listen(_handleEvent);
+    _eventsController.stream.listen(_handleEvent);
   }
 
   void dispose() {
@@ -29,7 +30,8 @@ class MenuBloc {
 
   void _handleEvent(MenuEvent action) async {
     if(action==MenuEvent.buyNot){
-      menuList.add(CoffeeMenu('image1', 'name1', 4));
+     // menuList.add(CoffeeMenu('image1', 'name1', 4));
+      menuList++;
     }
     _stateController.add(menuList);
   }

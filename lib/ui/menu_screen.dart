@@ -14,8 +14,9 @@ class _MenuScreenState extends State<MenuScreen> {
 
   @override
   void initState() {
-    super.initState();
     menuBloc = MenuBloc();
+    super.initState();
+
   }
 
   @override
@@ -25,11 +26,11 @@ class _MenuScreenState extends State<MenuScreen> {
         title: Text('Bloc pattern shop'),
       ),
       body: Container(
-        child: StreamBuilder<List<CoffeeMenu>>(
+        child: StreamBuilder<int>(
           stream: menuBloc.state1,
           builder: (context,snapshot){
             if(snapshot.hasData){
-                return Text('${snapshot.data![0].name}');
+                return Text('${snapshot.data.toString()}');
 
             }else{
               return Center(child: Text('ничо нету'),);
