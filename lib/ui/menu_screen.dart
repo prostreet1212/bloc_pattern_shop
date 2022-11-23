@@ -24,11 +24,18 @@ class _MenuScreenState extends State<MenuScreen> {
       appBar: AppBar(
         title: Text('Bloc pattern shop'),
       ),
-      body: StreamBuilder<List<CoffeeMenu>>(
-        stream: menuBloc.state,
-        builder: (_,snapshot){
-          return Text('aaa');
-        },
+      body: Container(
+        child: StreamBuilder<List<CoffeeMenu>>(
+          stream: menuBloc.state1,
+          builder: (context,snapshot){
+            if(snapshot.hasData){
+                return Text('${snapshot.data![0].name}');
+
+            }else{
+              return Center(child: Text('ничо нету'),);
+            }
+          },
+        ),
       ),
     );
   }
