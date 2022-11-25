@@ -1,25 +1,34 @@
-
 import 'dart:async';
 
-
 import 'package:bloc_pattern_shop/repository/menu_repository.dart';
+import 'package:bloc_pattern_shop/states/app_state.dart';
 
 import '../model/coffee_menu.dart';
 
-enum MenuEvent { buyNot }
 
-class MenuBloc {
-  //List<CoffeeMenu> menuList = [CoffeeMenu('image', 'name', 3)];
-  int menuList=1;
+/*class MarketingEvent {
+  void buyNot(){
 
-  final _stateController = StreamController<int>();
-  final _eventsController = StreamController<MenuEvent>();
+  }
+ }*/
+abstract class Action{}
+abstract class MarketingAction extends Action{}
+class BuyNot extends MarketingAction {
+  final CoffeeMenu coffeeMenu;
+  BuyNot(this.coffeeMenu);
+}
 
-  Stream<int> get state1 => _stateController.stream;
+class MarketingBloc {
 
-  Sink<MenuEvent> get action => _eventsController.sink;
+  AppState appState=AppState(ConstMenuRepository().listMenu, []);
 
-  MenuBloc() {
+  final _stateController = StreamController<AppState>();
+  final _eventsController = StreamController<Action>();
+
+  Stream<AppState> get state=>_stateController.stream;
+  Sink<Action> get action => _eventsController.sink;
+
+  MarketingBloc() {
     _eventsController.stream.listen(_handleEvent);
   }
 
@@ -28,11 +37,22 @@ class MenuBloc {
     _eventsController.close();
   }
 
-  void _handleEvent(MenuEvent action) async {
-    if(action==MenuEvent.buyNot){
-     // menuList.add(CoffeeMenu('image1', 'name1', 4));
-      menuList++;
+  void _handleEvent(Action action) async {
+      //menuList.add(CoffeeMenu('image1', 'name1', 4));
+    if(action is BuyNot){
+     List<CoffeeMenu?> list=appState.menuList.map((e) {
+       if(e==action.coffeeMenu){
+         e.isBuy=!action.coffeeMenu.isBuy;
+       }else{
+         return e;
+       }
+     }).toList();
+     appState=appState.copyWith(list,appState.badgeList);
     }
-    _stateController.add(menuList);
+
+    _stateController.add(appState);
+
   }
 }
+
+
