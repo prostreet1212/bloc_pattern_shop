@@ -7,7 +7,6 @@ import '../model/coffee_menu.dart';
 
 /*class MarketingEvent {
   void buyNot(){
-
   }
  }*/
 abstract class Action {}
@@ -21,8 +20,7 @@ class BuyNot extends MarketingAction {
 }
 
 class MarketingBloc {
-  AppState appState =
-      AppState( ConstMenuRepository().listMenu, []);
+  AppState appState = AppState(ConstMenuRepository().listMenu, []);
 
   final _stateController = StreamController<AppState>();
   final _eventsController = StreamController<Action>();
@@ -41,24 +39,23 @@ class MarketingBloc {
   }
 
   void _handleEvent(Action action) async {
-    //menuList.add(CoffeeMenu('image1', 'name1', 4));
     if (action is BuyNot) {
       List<CoffeeMenu> list = appState.menuList.map((e) {
-        if(e==action.coffeeMenu){
-          e.isBuy=!e.isBuy;
+        if (e == action.coffeeMenu) {
+          e.isBuy = !e.isBuy;
           return e;
-        }else{
+        } else {
           return e;
         }
-      } ).toList();
-      if(action.coffeeMenu.isBuy){
+      }).toList();
+      if (action.coffeeMenu.isBuy) {
         appState.badgeList.add(action.coffeeMenu);
-      }else{
+      } else {
         appState.badgeList.remove(action.coffeeMenu);
       }
       //appState.badgeList.add(action.coffeeMenu);
-      appState = appState.copyWith(
-          menuList: list, badgeList: appState.badgeList);
+      appState =
+          appState.copyWith(menuList: list, badgeList: appState.badgeList);
     }
     _stateController.add(appState);
   }

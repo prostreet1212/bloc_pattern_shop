@@ -1,12 +1,10 @@
-import 'package:bloc_pattern_shop/blocs/menu_bloc.dart';
+import 'package:bloc_pattern_shop/blocs/marketing_bloc.dart';
 import 'package:bloc_pattern_shop/states/app_state.dart';
 import 'package:bloc_pattern_shop/ui/badge_widget.dart';
 import 'package:flutter/material.dart';
 
-
-
 class MenuScreen extends StatefulWidget {
-   const MenuScreen({Key? key}) : super(key: key);
+  const MenuScreen({Key? key}) : super(key: key);
 
   @override
   MenuScreenState createState() => MenuScreenState();
@@ -19,7 +17,6 @@ class MenuScreenState extends State<MenuScreen> {
   void initState() {
     marketingBloc = MarketingBloc();
     super.initState();
-
   }
 
   @override
@@ -32,7 +29,9 @@ class MenuScreenState extends State<MenuScreen> {
         return Scaffold(
           appBar: AppBar(
             title: const Text('Bloc pattern shop'),
-            leading: BadgeWidget(count: snapshot.data!.badgeList.length.toString(),),
+            leading: BadgeWidget(
+              count: snapshot.data!.badgeList.length.toString(),
+            ),
           ),
           body: GridView.count(
             shrinkWrap: true,
@@ -55,7 +54,7 @@ class MenuScreenState extends State<MenuScreen> {
                     children: [
                       ClipRRect(
                         borderRadius: const BorderRadius.only(
-                            topLeft:  Radius.circular(15),
+                            topLeft: Radius.circular(15),
                             topRight: Radius.circular(15)),
                         child: Stack(
                           children: [
@@ -114,7 +113,6 @@ class MenuScreenState extends State<MenuScreen> {
           ),
         );
       },
-
     );
   }
 
