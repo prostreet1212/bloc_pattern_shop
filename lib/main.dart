@@ -6,7 +6,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp();
+  const MyApp({Key? key}) : super(key: key);
 
 
   @override
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MenuScreen(),
+      home:  const MenuScreen(),
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ListText extends StatelessWidget {
-    ListText({Key? key,required this.listText}) : super(key: key);
-  String listText;
+     const ListText({Key? key,required this.listText}) : super(key: key);
+  final String listText;
 
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,12 @@
 import 'package:bloc_pattern_shop/blocs/menu_bloc.dart';
-import 'package:bloc_pattern_shop/model/coffee_menu.dart';
 import 'package:bloc_pattern_shop/states/app_state.dart';
-import 'package:bloc_pattern_shop/ui/BadgeWidget.dart';
-import 'package:bloc_pattern_shop/ui/listText.dart';
+import 'package:bloc_pattern_shop/ui/badge_widget.dart';
 import 'package:flutter/material.dart';
 
+
+
 class MenuScreen extends StatefulWidget {
-  const MenuScreen({Key? key}) : super(key: key);
+   const MenuScreen({Key? key}) : super(key: key);
 
   @override
   MenuScreenState createState() => MenuScreenState();
@@ -17,8 +17,9 @@ class MenuScreenState extends State<MenuScreen> {
 
   @override
   void initState() {
-    super.initState();
     marketingBloc = MarketingBloc();
+    super.initState();
+
   }
 
   @override
@@ -28,10 +29,9 @@ class MenuScreenState extends State<MenuScreen> {
       initialData: marketingBloc.appState,
       stream: marketingBloc.state,
       builder: (_, snapshot) {
-        List<CoffeeMenu> listMenu = snapshot.data!.menuList;
         return Scaffold(
           appBar: AppBar(
-            title: Text('Bloc pattern shop'),
+            title: const Text('Bloc pattern shop'),
             leading: BadgeWidget(count: snapshot.data!.badgeList.length.toString(),),
           ),
           body: GridView.count(
@@ -47,15 +47,15 @@ class MenuScreenState extends State<MenuScreen> {
             children: snapshot.data!.menuList.map(
               (menu) {
                 return Card(
-                  color: Color.fromARGB(255, 255, 229, 85),
+                  color: const Color.fromARGB(255, 255, 229, 85),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Wrap(
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(15),
+                        borderRadius: const BorderRadius.only(
+                            topLeft:  Radius.circular(15),
                             topRight: Radius.circular(15)),
                         child: Stack(
                           children: [
@@ -68,7 +68,7 @@ class MenuScreenState extends State<MenuScreen> {
                               right: 0,
                               child: Container(
                                 alignment: Alignment.center,
-                                color: Color.fromARGB(255, 174, 206, 231),
+                                color: const Color.fromARGB(255, 174, 206, 231),
                                 height: 40,
                                 width: 40,
                                 child: IconButton(
@@ -88,7 +88,7 @@ class MenuScreenState extends State<MenuScreen> {
                       ),
                       Column(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 7,
                           ),
                           Text(
@@ -98,7 +98,7 @@ class MenuScreenState extends State<MenuScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Цена: '),
+                              const Text('Цена: '),
                               Text(
                                 '${menu.price} руб.',
                               ),
@@ -120,7 +120,7 @@ class MenuScreenState extends State<MenuScreen> {
 
   @override
   void dispose() {
-    marketingBloc.dispose();
+    //marketingBloc.dispose();
     super.dispose();
   }
 }
