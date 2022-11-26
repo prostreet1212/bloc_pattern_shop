@@ -22,7 +22,7 @@ class BuyNot extends MarketingAction {
 
 class MarketingBloc {
   AppState appState =
-      AppState(menuList: ConstMenuRepository().listMenu, badgeList: []);
+      AppState( ConstMenuRepository().listMenu, []);
 
   final _stateController = StreamController<AppState>();
   final _eventsController = StreamController<Action>();
@@ -51,6 +51,12 @@ class MarketingBloc {
           return e;
         }
       } ).toList();
+      if(action.coffeeMenu.isBuy){
+        appState.badgeList.add(action.coffeeMenu);
+      }else{
+        appState.badgeList.remove(action.coffeeMenu);
+      }
+      //appState.badgeList.add(action.coffeeMenu);
       appState = appState.copyWith(
           menuList: list, badgeList: appState.badgeList);
     }
