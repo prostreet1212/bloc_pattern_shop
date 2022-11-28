@@ -1,29 +1,30 @@
 import 'package:badges/badges.dart';
+import 'package:bloc_pattern_shop/blocs/ui_bloc.dart';
 import 'package:flutter/material.dart';
 
-import 'badge_screen.dart';
-
+import '../model/coffee_menu.dart';
 class BadgeWidget extends StatelessWidget {
-  const BadgeWidget({
-    Key? key,
-    required this.count,
-  }) : super(key: key);
-  final String count;
+   BadgeWidget({Key? key,required this.listBadge,required this.bloc}) : super(key: key);
+  List<CoffeeMenu> listBadge;
+  UiBloc bloc;
+
 
   @override
   Widget build(BuildContext context) {
-    print('build badge');
-    return Badge(
-      badgeContent: Text(count),
-      position: const BadgePosition(start: 26, bottom: 26),
-      child: IconButton(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return const BadgeScreen();
-          }));
-        },
-        icon: const Icon(Icons.shopping_cart),
-      ),
-    );
+    return AppBar(
+        title: const Text('Flutter_bloc_shop'),
+        leading: Badge(
+          badgeContent: Text(listBadge.length.toString()),
+          position: const BadgePosition(start: 26, bottom: 26),
+          child: IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) {
+                    return  Container();
+                  }));
+            },
+          ),
+        ));
   }
 }

@@ -1,8 +1,10 @@
 class CoffeeMenu {
-  String image;
-  String name;
-  double price;
-  bool isBuy = false;
+  final String image;
+  final String name;
+  final double price;
+  final bool isBuy ;
 
-  CoffeeMenu(this.image, this.name, this.price);
+
+
+  const CoffeeMenu(this.image, this.name, this.price, {this.isBuy = false});
 }

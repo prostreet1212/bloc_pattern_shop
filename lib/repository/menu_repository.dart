@@ -1,17 +1,17 @@
 import '../model/coffee_menu.dart';
 
-abstract class MenuRepository {
-  const MenuRepository();
+abstract  class MenuRepository {
+   const MenuRepository();
 
-  List<CoffeeMenu> getListMenu();
+   List<CoffeeMenu> getListMenu();
 
   void changeMenuStatus(CoffeeMenu coffeeMenu);
 }
 
 class ConstMenuRepository extends MenuRepository {
-  ConstMenuRepository();
+  const ConstMenuRepository();
 
-  List<CoffeeMenu> listMenu = <CoffeeMenu>[
+  static const  listMenu = <CoffeeMenu>[
     CoffeeMenu('latte.jpg', 'Латте', 80),
     CoffeeMenu('latte_grusha.jpg', 'Латте груша', 100),
     CoffeeMenu('malina_kokos.jpg', 'Раф малина-кокос', 100),
